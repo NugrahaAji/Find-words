@@ -9,6 +9,45 @@ void toUpperCase(char* str){
     }
 }
 
+//fungsi cek
+bool Horizontal(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 0; i < 23; i++) {
+        for (int j = 0; j <= 23; j++) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if (matrix[i][j + k] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found == true){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool Vertical(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 0; i <= 23; i++) {
+        for (int j = 0; j < 23; j++) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if (matrix[i + k][j] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found == True) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+
+
 bool FindWord(char* word) {
     char matrix[23][23] = {
         {'A', 'A', 'F', 'L', 'K', 'H', 'P', 'F', 'S', 'S', 'U', 'F', 'I', 'C', 'I', 'C', 'L', 'E', 'S', 'G', 'N', 'N', 'H'},
