@@ -38,7 +38,7 @@ bool Vertical(char* word, char matrix[23][23], int wordLength) {
                     break;
                 }
             }
-            if (found == True) {
+            if (found == true) {
                 return true;
             }
         }
@@ -46,7 +46,23 @@ bool Vertical(char* word, char matrix[23][23], int wordLength) {
     return false;
 }
 
-
+bool Diagonal(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 0; i < 23; i++) {
+        for (int j = 0; j < 23; j++) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if (matrix[i - k][j - k] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found == true) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 bool FindWord(char* word) {
     char matrix[23][23] = {
