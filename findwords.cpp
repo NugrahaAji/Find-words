@@ -198,12 +198,12 @@ bool FindWord(char* word) {
 int main() {
     int num;
     cin >> num;
-    cin.ignore(); 
-
-    char words[num][23];
+    
+    char words[num][24];
 
     for (int i = 0; i < num; i++) {
-        cin.getline(words[i], 25);
+        cin.ignore();
+        cin.getline(words[i], 23);
         toUpperCase(words[i]);
     }
 
