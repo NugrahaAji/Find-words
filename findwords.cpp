@@ -100,7 +100,7 @@ bool DiagTopLeft(char* word, char matrix[23][23], int wordLength) {
     return false;
 }
 
-bool DiahTopRight(char* word, char matrix[23][23], int wordLength) {
+bool DiagTopRight(char* word, char matrix[23][23], int wordLength) {
     for (int i = 0; i < 23; i++) {
         for (int j = 0; j < 23; j++) {
             bool found = true;
@@ -187,7 +187,7 @@ bool FindWord(char* word) {
     if( LefttoRight(word, matrix, Wordlength) || RighttoLeft(word, matrix, Wordlength) ||
         ToptoBottom(word, matrix, Wordlength) || BottomtoTop(word, matrix, Wordlength) ||
         DiagBottomLeft(word, matrix, Wordlength) || DiagBottomRight(word, matrix, Wordlength) ||
-        DiagTopLeft(word, matrix, Wordlength) || DiahTopRight(word, matrix, Wordlength) ) {
+        DiagTopLeft(word, matrix, Wordlength) || DiagTopRight(word, matrix, Wordlength) ) {
             return true;
         }
     else{
