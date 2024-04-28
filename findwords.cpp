@@ -10,9 +10,9 @@ void toUpperCase(char* str){
 }
 
 //fungsi cek
-bool Horizontal(char* word, char matrix[23][23], int wordLength) {
+bool LefttoRight(char* word, char matrix[23][23], int wordLength) {
     for (int i = 0; i < 23; i++) {
-        for (int j = 0; j <= 23; j++) {
+        for (int j = 0; j < 23; j++) {
             bool found = true;
             for (int k = 0; k < wordLength; k++) {
                 if (matrix[i][j + k] != word[k]) {
@@ -28,8 +28,26 @@ bool Horizontal(char* word, char matrix[23][23], int wordLength) {
     return false;
 }
 
-bool Vertical(char* word, char matrix[23][23], int wordLength) {
-    for (int i = 0; i <= 23; i++) {
+bool RighttoLeft(char* word, char matrix[23][23], int wordLength) {
+    for(int i = 22; i >= 0; i--) {
+        for(int j = 22; j >= 0; j--) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if(matrix[i][j - k] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if(found == true){
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool ToptoBottom(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 0; i < 23; i++) {
         for (int j = 0; j < 23; j++) {
             bool found = true;
             for (int k = 0; k < wordLength; k++) {
@@ -46,12 +64,84 @@ bool Vertical(char* word, char matrix[23][23], int wordLength) {
     return false;
 }
 
-bool Diagonal(char* word, char matrix[23][23], int wordLength) {
+bool BottomtoTop(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 22; i >= 0; i--) {
+        for (int j = 22; j >= 0; j--) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if (matrix[i - k][j] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found == true) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DiagTopLeft(char* word, char matrix[23][23], int wordLength) {
     for (int i = 0; i < 23; i++) {
         for (int j = 0; j < 23; j++) {
             bool found = true;
             for (int k = 0; k < wordLength; k++) {
                 if (matrix[i - k][j - k] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found == true) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DiahTopRight(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 0; i < 23; i++) {
+        for (int j = 0; j < 23; j++) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if (matrix[i - k][j + k] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found == true) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DiagBottomLeft(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 0; i < 23; i++) {
+        for (int j = 0; j < 23; j++) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if (matrix[i + k][j - k] != word[k]) {
+                    found = false;
+                    break;
+                }
+            }
+            if (found == true) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+bool DiagBottomRight(char* word, char matrix[23][23], int wordLength) {
+    for (int i = 0; i < 23; i++) {
+        for (int j = 0; j < 23; j++) {
+            bool found = true;
+            for (int k = 0; k < wordLength; k++) {
+                if (matrix[i + k][j + k] != word[k]) {
                     found = false;
                     break;
                 }
@@ -94,6 +184,15 @@ bool FindWord(char* word) {
     int Wordlength = strlen(word);
 
     //algoritma nnti disini ya
+    if( LefttoRight(word, matrix, Wordlength) || RighttoLeft(word, matrix, Wordlength) ||
+        ToptoBottom(word, matrix, Wordlength) || BottomtoTop(word, matrix, Wordlength) ||
+        DiagBottomLeft(word, matrix, Wordlength) || DiagBottomRight(word, matrix, Wordlength) ||
+        DiagTopLeft(word, matrix, Wordlength) || DiahTopRight(word, matrix, Wordlength) ) {
+            return true;
+        }
+    else{
+        return false;
+    } 
 }
 
 int main() {
@@ -108,9 +207,18 @@ int main() {
         toUpperCase(words[i]);
     }
 
-    //test
-    for (int i = 0; i < num; i++) {
-        cout << words[i] << endl;
+    // //test
+    // for (int i = 0; i < num; i++) {
+    //     cout << words[i] << endl;
+    // }
+
+    for(int i = 0; i < num; i++){
+        if (FindWord(words[i]) == true){
+            cout << "Ada\n";
+        }
+        else {
+            cout << "Tidak Ada\n";
+        }
     }
     return 0;
 }
